@@ -11,7 +11,7 @@ function App() {
         alignItems: "center",
         justifyContent: "center",
       }}>
-      <TodoStatus />
+      <TodoStatus title={"No status"} />
     </Box>
   );
 }
