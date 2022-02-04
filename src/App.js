@@ -1,6 +1,6 @@
 import "./App.css";
 import { Box } from "@mui/material";
-import TodoStatus from "./components/TodoStatus";
+import TodoStatusList from "./components/TodoStstusList";
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         alignItems: "center",
         justifyContent: "center",
       }}>
-      <TodoStatus title={"No status"} />
+      <TodoStatusList />
     </Box>
   );
 }

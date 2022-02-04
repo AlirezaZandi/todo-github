@@ -9,10 +9,11 @@ import {
 
 import ClearIcon from "@mui/icons-material/Clear";
 
-const TodoCard = ({ title, todos, setTodos, id }) => {
+const TodoCard = ({ title, setTodos, id }) => {
   const handleDeleteTodo = () => {
-    const newTodos = todos.filter((todo) => todo.id !== id);
-    setTodos(newTodos);
+    setTodos((prevTodos) => {
+      return prevTodos.filter((todo) => todo.id !== id);
+    });
   };
 
   return (

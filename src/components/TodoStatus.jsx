@@ -4,27 +4,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import TodoCard from "./TodoCard";
 import AddTodoPopop from "./AddTodoPopop";
 
-const TodoStatus = ({ title }) => {
-  //create todos state
-  const [todos, setTodos] = React.useState([
-    {
-      id: 1,
-      title: "Learn React",
-    },
-    {
-      id: 2,
-      title: "Learn JS",
-    },
-    {
-      id: 3,
-      title: "Learn JSX",
-    },
-    {
-      id: 4,
-      title: "Learn HTML",
-    },
-  ]);
-
+const TodoStatus = ({ title, todos, setTodos }) => {
   const [openDialog, setOpenDialog] = React.useState(false);
 
   return (
@@ -32,7 +12,7 @@ const TodoStatus = ({ title }) => {
       <Paper
         elevation={5}
         sx={{
-          height: "90%",
+          height: "95%",
           width: "400px",
           display: "flex",
           flexDirection: "column",
@@ -79,8 +59,8 @@ const TodoStatus = ({ title }) => {
       <AddTodoPopop
         open={openDialog}
         setOpen={setOpenDialog}
-        todos={todos}
         setTodo={setTodos}
+        statusTitle={title}
       />
     </>
   );

@@ -4,41 +4,41 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  TextField,
   DialogActions,
+  TextField,
   Button,
 } from "@mui/material";
 
-const AddTodoPopop = ({ open, setOpen, setTodo, statusTitle }) => {
+const AddStatusDialog = ({ setStatus, open, setOpen }) => {
   const [title, setTitle] = React.useState("");
 
-  const handleAddTodo = (e) => {
+  const handleAddStatus = (e) => {
     e.preventDefault();
     if (title.trim() === "") {
       alert("Please enter a title");
       return;
     }
-    const newTodo = {
+    const newStatus = {
       id: Date.now(),
       title: title,
-      status: statusTitle,
     };
-    setTodo((p) => [...p, newTodo]);
+    setStatus((p) => [...p, newStatus]);
     setOpen(false);
   };
+
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
-      <form onSubmit={(e) => handleAddTodo(e)}>
-        <DialogTitle>Add Todo</DialogTitle>
+      <form onSubmit={(e) => handleAddStatus(e)}>
+        <DialogTitle>Add Status</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter the todo title and click the add button
+            Enter the status title and click the add button
           </DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            id="todo-title"
-            label="Todo Title"
+            id="status-title"
+            label="Status Title"
             type="text"
             fullWidth
             variant="outlined"
@@ -50,7 +50,7 @@ const AddTodoPopop = ({ open, setOpen, setTodo, statusTitle }) => {
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button
             variant="contained"
-            onClick={(e) => handleAddTodo(e)}
+            onClick={(e) => handleAddStatus(e)}
             type={"submit"}>
             Add
           </Button>
@@ -60,4 +60,4 @@ const AddTodoPopop = ({ open, setOpen, setTodo, statusTitle }) => {
   );
 };
 
-export default AddTodoPopop;
+export default AddStatusDialog;
