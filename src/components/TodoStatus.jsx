@@ -23,8 +23,8 @@ const TodoStatus = ({ id }) => {
 
   const handleDeleteStatus = () => {
     console.log(todoList);
-    todoList.forEach((todo) => {
-      dispatch(removeTodo({ id: todo.id }));
+    todos.forEach((todoId) => {
+      dispatch(removeTodo({ id: todoId }));
     });
     dispatch(removeTodoStatus({ id: id }));
   };
