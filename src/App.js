@@ -23,7 +23,6 @@ function App() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          overflow: "visible",
         }}>
         <TodoStatusList />
       </Box>

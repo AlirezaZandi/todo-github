@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, Typography } from "@mui/material";
+import { Button, Card, Typography, Box } from "@mui/material";
 
 import ClearIcon from "@mui/icons-material/Clear";
 
@@ -33,9 +33,11 @@ const TodoCard = ({ id, statusId, index }) => {
             justifyContent: "space-between",
             cursor: "grab",
           }}>
-          <Typography variant="subtitle1" component={"h4"} sx={{ p: "1rem" }}>
-            {todo.description}
-          </Typography>
+          <Box>
+            <Typography variant="subtitle1" component={"h4"} sx={{ p: "1rem" }}>
+              {todo.description}
+            </Typography>
+          </Box>
 
           <Button
             color="error"

@@ -72,8 +72,8 @@ const TodoStatus = ({ id }) => {
               {todos.map((todo, index) => (
                 <TodoCard id={todo} key={todo} statusId={id} index={index} />
               ))}
+              {provided.placeholder}
             </Box>
-            {provided.placeholder}
             {/* add todo */}
             <Box>
               <Button variant="contained" onClick={() => setOpenDialog(true)}>

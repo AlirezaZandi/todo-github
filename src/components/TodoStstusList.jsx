@@ -77,7 +77,7 @@ const TodoStstusList = () => {
           alignItems: "center",
           width: "100%",
           paddingInline: { xs: ".5rem", md: "2rem" },
-          overflow: "auto",
+          //overflow: "auto",
           "& > *": {
             flexShrink: 0,
           },
