@@ -1,0 +1,26 @@
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+  cursor: pointer;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  cursor: pointer;
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(99, 99, 99);
+  width: 2px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+  background: #555;
+}

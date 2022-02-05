@@ -8,8 +8,13 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
+import { v4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { addTodoToStatus } from "../store/todoStatus";
+import { addTodo } from "../store/todo";
 
-const AddTodoPopop = ({ open, setOpen, setTodo, statusTitle }) => {
+const AddTodoPopop = ({ open, setOpen, statusId }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = React.useState("");
 
   const handleAddTodo = (e) => {
@@ -18,12 +23,9 @@ const AddTodoPopop = ({ open, setOpen, setTodo, statusTitle }) => {
       alert("Please enter a title");
       return;
     }
-    const newTodo = {
-      id: Date.now(),
-      title: title,
-      status: statusTitle,
-    };
-    setTodo((p) => [...p, newTodo]);
+    const id = v4();
+    dispatch(addTodo({ id, description: title }));
+    dispatch(addTodoToStatus({ id: statusId, todoId: id }));
     setOpen(false);
   };
   return (

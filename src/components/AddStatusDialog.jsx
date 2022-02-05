@@ -9,20 +9,21 @@ import {
   Button,
 } from "@mui/material";
 
-const AddStatusDialog = ({ setStatus, open, setOpen }) => {
+import { useDispatch } from "react-redux";
+import { addTodoStatus } from "../store/todoStatus";
+
+const AddStatusDialog = ({ open, setOpen }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = React.useState("");
 
   const handleAddStatus = (e) => {
     e.preventDefault();
+
     if (title.trim() === "") {
-      alert("Please enter a title");
+      alert("Please enter a name");
       return;
     }
-    const newStatus = {
-      id: Date.now(),
-      title: title,
-    };
-    setStatus((p) => [...p, newStatus]);
+    dispatch(addTodoStatus({ name: title }));
     setOpen(false);
   };
 

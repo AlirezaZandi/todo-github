@@ -1,67 +1,82 @@
 import React from "react";
 
-import { Box, Button, Paper, Typography } from "@mui/material";
+import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
 import TodoCard from "./TodoCard";
 import AddTodoPopop from "./AddTodoPopop";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const TodoStatus = ({ title, todos, setTodos }) => {
+import { useSelector, useDispatch } from "react-redux";
+import { removeTodoStatus, removeTodoFromStatus } from "../store/todoStatus";
+import { Droppable } from "react-beautiful-dnd";
+
+const TodoStatus = ({ id }) => {
+  const { name, todos } = useSelector((state) =>
+    state.todoStatus.find((status) => status.id === id)
+  );
+
+  const dispatch = useDispatch();
+
   const [openDialog, setOpenDialog] = React.useState(false);
+
+  const handleDeleteStatus = () => {
+    dispatch(removeTodoStatus({ id: id }));
+  };
 
   return (
     <>
-      <Paper
-        elevation={5}
-        sx={{
-          height: "95%",
-          width: "400px",
-          display: "flex",
-          flexDirection: "column",
-          p: "1rem",
-          gap: "1rem",
-        }}>
-        {/* title */}
-        <Box>
-          <Typography variant="h5" component={"h3"}>
-            {title}
-          </Typography>
-        </Box>
-
-        {/* todos */}
-        <Box
-          flex={1}
-          sx={{
-            overflowY: "overlay",
-            "& > *": {
-              marginInline: "1rem",
-              marginBottom: ".75rem",
-            },
-          }}>
-          {todos.map((todo) => {
-            return (
-              <TodoCard
-                key={todo.id}
-                title={todo.title}
-                todos={todos}
-                setTodos={setTodos}
-                id={todo.id}
-              />
-            );
-          })}
-        </Box>
-
-        {/* add todo */}
-        <Box>
-          <Button variant="contained" onClick={() => setOpenDialog(true)}>
-            Add new todo
-          </Button>
-        </Box>
-      </Paper>
-      <AddTodoPopop
-        open={openDialog}
-        setOpen={setOpenDialog}
-        setTodo={setTodos}
-        statusTitle={title}
-      />
+      <Droppable droppableId={id}>
+        {(provided) => (
+          <Paper
+            elevation={5}
+            sx={{
+              height: "95%",
+              maxWidth: "400px",
+              width: "80vw",
+              display: "flex",
+              flexDirection: "column",
+              p: "1rem",
+              gap: "1rem",
+            }}>
+            {/* title */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}>
+              <Typography variant="h5" component={"h3"}>
+                {name}
+              </Typography>
+              <IconButton color="default" onClick={handleDeleteStatus}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+            <Box
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              flex={1}
+              sx={{
+                overflowY: "overlay",
+                "& > *": {
+                  marginInline: "1rem",
+                  marginBottom: ".75rem",
+                },
+              }}>
+              {todos.map((todo, index) => (
+                <TodoCard id={todo} key={todo} statusId={id} index={index} />
+              ))}
+            </Box>
+            {provided.placeholder}
+            {/* add todo */}
+            <Box>
+              <Button variant="contained" onClick={() => setOpenDialog(true)}>
+                Add new todo
+              </Button>
+            </Box>
+          </Paper>
+        )}
+      </Droppable>
+      <AddTodoPopop open={openDialog} setOpen={setOpenDialog} statusId={id} />
     </>
   );
 };
