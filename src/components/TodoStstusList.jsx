@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import React, { useCallback } from "react";
+import React from "react";
 import TodoStatus from "./TodoStatus";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -7,12 +7,11 @@ import AddStatusDialog from "./AddStatusDialog";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  addTodoToStatus,
   removeTodoFromStatus,
   UpdateTodoInStatusOrder,
 } from "../store/todoStatus";
 
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const TodoStstusList = () => {
   const todoStatus = useSelector((state) => state.todoStatus);

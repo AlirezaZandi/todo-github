@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Card, CardActionArea, Typography } from "@mui/material";
+import { Button, Card, Typography } from "@mui/material";
 
 import ClearIcon from "@mui/icons-material/Clear";
 

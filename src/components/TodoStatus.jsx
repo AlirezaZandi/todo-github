@@ -6,7 +6,7 @@ import AddTodoPopop from "./AddTodoPopop";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodoStatus, removeTodoFromStatus } from "../store/todoStatus";
+import { removeTodoStatus } from "../store/todoStatus";
 import { Droppable } from "react-beautiful-dnd";
 import { removeTodo } from "../store/todo";
 
