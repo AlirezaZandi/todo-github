@@ -8,17 +8,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector, useDispatch } from "react-redux";
 import { removeTodoStatus, removeTodoFromStatus } from "../store/todoStatus";
 import { Droppable } from "react-beautiful-dnd";
+import { removeTodo } from "../store/todo";
 
 const TodoStatus = ({ id }) => {
   const { name, todos } = useSelector((state) =>
     state.todoStatus.find((status) => status.id === id)
   );
 
+  const todoList = useSelector((state) => state.todo);
+
   const dispatch = useDispatch();
 
   const [openDialog, setOpenDialog] = React.useState(false);
 
   const handleDeleteStatus = () => {
+    console.log(todoList);
+    todoList.forEach((todo) => {
+      dispatch(removeTodo({ id: todo.id }));
+    });
     dispatch(removeTodoStatus({ id: id }));
   };
 

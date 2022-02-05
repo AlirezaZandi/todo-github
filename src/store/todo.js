@@ -3,7 +3,9 @@ import { v4 } from "uuid";
 
 const slice = createSlice({
   name: "todos",
-  initialState: [],
+  initialState: localStorage.getItem("todos")
+    ? JSON.parse(localStorage.getItem("todos"))
+    : [],
   reducers: {
     addTodo: (state, action) => {
       const { description, id } = action.payload;
