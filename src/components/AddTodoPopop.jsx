@@ -12,13 +12,21 @@ import {
   Typography,
 } from "@mui/material";
 import { v4 } from "uuid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTodoToStatus } from "../store/todoStatus";
 import { addTodo } from "../store/todo";
+import Badges from "./common/Badges";
+import SelectBadges from "./common/SelectBadges";
 
 const AddTodoPopop = ({ open, setOpen, statusId }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = React.useState("");
+  const [selctedBadges, setSelectedBadges] = React.useState([]);
+  const [moreInfo, setMoreInfo] = React.useState("");
+
+  const badges = useSelector((state) => {
+    return state.badge;
+  });
 
   const handleAddTodo = (e) => {
     e.preventDefault();
@@ -27,7 +35,8 @@ const AddTodoPopop = ({ open, setOpen, statusId }) => {
       return;
     }
     const id = v4();
-    dispatch(addTodo({ id, description: title }));
+    const badgesIds = selctedBadges.map((badge) => badge.id);
+    dispatch(addTodo({ id, description: title, badgesIds, moreInfo }));
     dispatch(addTodoToStatus({ id: statusId, todoId: id }));
     setOpen(false);
   };
@@ -64,15 +73,15 @@ const AddTodoPopop = ({ open, setOpen, statusId }) => {
               sx={{
                 marginBottom: "1rem",
               }}
+              variant="outlined"
+              value={moreInfo}
+              onChange={(e) => setMoreInfo(e.target.value)}
             />
 
-            <Autocomplete
-              id="combo-box-tag"
-              options={["Bug", "Feature", "Enhancement", "Epic"]}
-              fullWidth
-              renderInput={(params) => (
-                <TextField sx={{ width: "50%" }} {...params} label="Tags" />
-              )}
+            <SelectBadges
+              badges={badges}
+              selectedBadges={selctedBadges}
+              setSelectedBadges={setSelectedBadges}
             />
           </Box>
         </DialogContent>

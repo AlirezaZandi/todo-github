@@ -8,12 +8,25 @@ import { removeTodo } from "../store/todo";
 import { removeTodoFromStatus } from "../store/todoStatus";
 
 import { Draggable } from "react-beautiful-dnd";
+import Badges from "./common/Badges";
 
 const TodoCard = ({ id, statusId, index }) => {
   const dispatch = useDispatch();
 
   const color = useSelector((state) => {
     return state.todoStatus.find((status) => status.id === statusId).color;
+  });
+
+  const TodoBadges = useSelector((state) => {
+    try {
+      return state.todo
+        .find((todo) => todo.id === id)
+        .badges.map((badgeId) => {
+          return state.badge.find((badge) => badge.id === badgeId);
+        });
+    } catch (e) {
+      return [];
+    }
   });
 
   const todo = useSelector((state) =>
@@ -42,6 +55,17 @@ const TodoCard = ({ id, statusId, index }) => {
           <Box>
             <Typography variant="subtitle1" component={"h4"} sx={{ p: "1rem" }}>
               {todo.description}
+              {"  "}
+              <Box sx={{ "& > *": { marginRight: ".5rem" } }}>
+                {TodoBadges.length > 0 &&
+                  TodoBadges.map((badge) => (
+                    <Badges
+                      color={badge.color}
+                      title={badge.description}
+                      key={badge.id}
+                    />
+                  ))}
+              </Box>
             </Typography>
           </Box>
 

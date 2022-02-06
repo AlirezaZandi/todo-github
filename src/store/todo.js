@@ -7,10 +7,12 @@ const slice = createSlice({
     : [],
   reducers: {
     addTodo: (state, action) => {
-      const { description, id } = action.payload;
+      const { description, id, badgesIds, moreInfo } = action.payload;
       const todo = {
         id,
         description,
+        badges: badgesIds,
+        moreInfo,
       };
       return [...state, todo];
     },
@@ -19,8 +21,14 @@ const slice = createSlice({
       const { id } = action.payload;
       return state.filter((todo) => todo.id !== id);
     },
+
+    addBadges: (state, action) => {
+      const { id, badgeIds } = action.payload;
+      const todo = state.find((todo) => todo.id === id);
+      todo.badges = badgeIds;
+    },
   },
 });
 
 export default slice.reducer;
-export const { addTodo, removeTodo } = slice.actions;
+export const { addTodo, removeTodo, addBadges } = slice.actions;

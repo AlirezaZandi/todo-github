@@ -81,7 +81,6 @@ const TodoStstusList = () => {
         axis="x"
         values={todoStatus}
         onReorder={(newOrder) => {
-          console.log(newOrder);
           dispatch(updateTodoStatusOrder({ newOrder }));
         }}>
         <Box

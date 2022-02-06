@@ -146,7 +146,7 @@ const TodoStatus = ({ id }) => {
                 sx={{
                   overflowY: "overlay",
                   "& > *": {
-                    marginInline: "1rem",
+                    //marginInline: "1rem",
                     marginBottom: ".75rem",
                   },
                 }}>
