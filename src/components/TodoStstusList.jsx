@@ -5,10 +5,11 @@ import TodoStatus from "./TodoStatus";
 import AddIcon from "@mui/icons-material/Add";
 import AddStatusDialog from "./AddStatusDialog";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Reorder, useDragControls } from "framer-motion";
 import {
   removeTodoFromStatus,
   UpdateTodoInStatusOrder,
+  updateTodoStatusOrder,
 } from "../store/todoStatus";
 
 import { DragDropContext } from "react-beautiful-dnd";
@@ -69,31 +70,44 @@ const TodoStstusList = () => {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-start",
-          gap: "1rem",
-          alignItems: "center",
+      <Reorder.Group
+        style={{
           width: "100%",
-          paddingInline: { xs: "0", md: "2rem" },
-          //overflow: "auto",
-          "& > *": {
-            flexShrink: 0,
-          },
         }}
-        height="95%">
-        {todoStatus.map((status) => {
-          return <TodoStatus key={status.id} id={status.id} />;
-        })}
-        <Button
-          variant="text"
-          sx={{ alignSelf: "flex-start", color: "#ddd" }}
-          onClick={() => setOpenDialog(true)}>
-          <AddIcon />
-          Add new status
-        </Button>
-      </Box>
+        axis="x"
+        values={todoStatus}
+        onReorder={(newOrder) => {
+          console.log(newOrder);
+          dispatch(updateTodoStatusOrder({ newOrder }));
+        }}>
+        <Box
+          height="95%"
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start",
+            gap: "1rem",
+            alignItems: "flex-start",
+            width: "95%",
+            paddingInline: { xs: "0", md: "2rem" },
+            overflow: "auto",
+            listStyle: "none",
+            height: "95vh",
+            "& > *": {
+              flexShrink: 0,
+            },
+          }}>
+          {todoStatus.map((status) => {
+            return <TodoStatus id={status.id} key={status.id} />;
+          })}
+          <Button
+            variant="text"
+            sx={{ alignSelf: "flex-start", color: "#ddd" }}
+            onClick={() => setOpenDialog(true)}>
+            <AddIcon />
+            Add new status
+          </Button>
+        </Box>
+      </Reorder.Group>
       <AddStatusDialog open={openDialog} setOpen={setOpenDialog} />
     </DragDropContext>
   );
