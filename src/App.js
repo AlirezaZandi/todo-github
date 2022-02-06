@@ -3,7 +3,7 @@ import "./App.css";
 import { Box } from "@mui/material";
 import { Provider } from "react-redux";
 import store from "./store/Store";
-import TodoAppPage from "./pages/TodoAppPage";
+import TodoAppPage from "./pagesComponent/TodoAppPage";
 
 function App() {
   useEffect(() => {
