@@ -5,7 +5,7 @@ import TodoStatus from "./TodoStatus";
 import AddIcon from "@mui/icons-material/Add";
 import AddStatusDialog from "./AddStatusDialog";
 import { useSelector, useDispatch } from "react-redux";
-import { Reorder, useDragControls } from "framer-motion";
+import { Reorder } from "framer-motion";
 import {
   removeTodoFromStatus,
   UpdateTodoInStatusOrder,

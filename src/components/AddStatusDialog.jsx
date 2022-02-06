@@ -11,7 +11,6 @@ import {
 
 import { useDispatch } from "react-redux";
 import { addTodoStatus } from "../store/todoStatus";
-import ColorPicker from "./ColorPicker";
 
 const AddStatusDialog = ({ open, setOpen }) => {
   const dispatch = useDispatch();

@@ -7,12 +7,10 @@ import {
   Paper,
   TextField,
   Typography,
-  ClickAwayListener,
 } from "@mui/material";
 import TodoCard from "./TodoCard";
 import AddTodoPopop from "./AddTodoPopop";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { ColorLens } from "@mui/icons-material";
 import { Reorder, useDragControls } from "framer-motion";
 
 import { useSelector, useDispatch } from "react-redux";

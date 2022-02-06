@@ -1,12 +1,6 @@
 import React from "react";
-import Paper from "@mui/material/Paper";
-import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
-import { IconButton, Menu, Box, Button } from "@mui/material";
-
-import ListItemIcon from "@mui/material/ListItemIcon";
-
-import ContentCut from "@mui/icons-material/ContentCut";
+import { IconButton, Menu } from "@mui/material";
 
 import { Circle, CheckCircle, ColorLens, Clear } from "@mui/icons-material";
 
