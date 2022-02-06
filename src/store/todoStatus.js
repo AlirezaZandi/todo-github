@@ -47,6 +47,13 @@ const slice = createSlice({
       todoStatus.todos = newOrder;
       return state;
     },
+
+    updateTodoStatusName: (state, action) => {
+      const { id, name } = action.payload;
+      const todoStatus = state.find((todoStatus) => todoStatus.id === id);
+      todoStatus.name = name;
+      return state;
+    },
   },
 });
 
@@ -58,4 +65,5 @@ export const {
   removeTodoFromStatus,
   updateTodoStatusOrder,
   UpdateTodoInStatusOrder,
+  updateTodoStatusName,
 } = slice.actions;

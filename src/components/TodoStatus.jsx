@@ -1,32 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Box, Button, IconButton, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
+  TextField,
+  Typography,
+  ClickAwayListener,
+} from "@mui/material";
 import TodoCard from "./TodoCard";
 import AddTodoPopop from "./AddTodoPopop";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { useSelector, useDispatch } from "react-redux";
-import { removeTodoStatus } from "../store/todoStatus";
+import { removeTodoStatus, updateTodoStatusName } from "../store/todoStatus";
 import { Droppable } from "react-beautiful-dnd";
 import { removeTodo } from "../store/todo";
 
 const TodoStatus = ({ id }) => {
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [statusTitle, setStatusTitle] = useState("");
+  const [editMode, setEditMode] = useState(false);
+
   const { name, todos } = useSelector((state) =>
     state.todoStatus.find((status) => status.id === id)
   );
+
+  useEffect(() => {
+    setStatusTitle(name);
+  }, []);
 
   const todoList = useSelector((state) => state.todo);
 
   const dispatch = useDispatch();
 
-  const [openDialog, setOpenDialog] = React.useState(false);
-
   const handleDeleteStatus = () => {
-    console.log(todoList);
     todos.forEach((todoId) => {
       dispatch(removeTodo({ id: todoId }));
     });
     dispatch(removeTodoStatus({ id: id }));
+  };
+
+  const handleUpdateStatusName = () => {
+    dispatch(updateTodoStatusName({ id: id, name: statusTitle }));
+    setEditMode(false);
   };
 
   return (
@@ -51,9 +69,31 @@ const TodoStatus = ({ id }) => {
                 alignItems: "center",
                 justifyContent: "space-between",
               }}>
-              <Typography variant="h5" component={"h3"}>
+              <TextField
+                sx={{
+                  display: editMode ? "block" : "none",
+                  "& input": {
+                    width: statusTitle.length * 1.2 + "ch",
+                    maxWidth: "100%",
+                  },
+                }}
+                variant={"outlined"}
+                size="small"
+                value={statusTitle}
+                onChange={(e) => setStatusTitle(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") handleUpdateStatusName();
+                }}
+                onBlur={() => handleUpdateStatusName()}
+              />
+
+              <Typography
+                variant="h6"
+                sx={{ display: editMode ? "none" : "block", cursor: "pointer" }}
+                onClick={() => setEditMode(true)}>
                 {name}
               </Typography>
+
               <IconButton color="default" onClick={handleDeleteStatus}>
                 <DeleteIcon />
               </IconButton>
