@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
   Box,
@@ -22,21 +22,15 @@ import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 
 const TodoStatus = ({ id }) => {
   const [openDialog, setOpenDialog] = React.useState(false);
-  const [statusTitle, setStatusTitle] = useState("");
-  const [editMode, setEditMode] = useState(false);
-
   const { name, todos, color } = useSelector((state) =>
     state.todoStatus.find((status) => status.id === id)
   );
+  const [statusTitle, setStatusTitle] = useState(name);
+  const [editMode, setEditMode] = useState(false);
+
   const currentStatus = useSelector((state) =>
     state.todoStatus.find((status) => status.id === id)
   );
-
-  useEffect(() => {
-    setStatusTitle(name);
-  }, []);
-
-  const todoList = useSelector((state) => state.todo);
   const controls = useDragControls();
 
   const dispatch = useDispatch();

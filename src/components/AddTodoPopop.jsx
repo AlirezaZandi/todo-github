@@ -3,19 +3,15 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
-  Autocomplete,
   TextField,
   DialogActions,
   Button,
   Box,
-  Typography,
 } from "@mui/material";
 import { v4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import { addTodoToStatus } from "../store/todoStatus";
 import { addTodo } from "../store/todo";
-import Badges from "./common/Badges";
 import SelectBadges from "./common/SelectBadges";
 
 const AddTodoPopop = ({ open, setOpen, statusId }) => {
