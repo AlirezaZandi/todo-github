@@ -68,7 +68,7 @@ const TodoStatus = ({ id }) => {
             <Paper
               elevation={5}
               sx={{
-                height: "95%",
+                height: "100%",
                 maxWidth: "400px",
                 width: "80vw",
                 display: "flex",

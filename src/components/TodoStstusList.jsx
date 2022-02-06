@@ -73,6 +73,10 @@ const TodoStstusList = () => {
       <Reorder.Group
         style={{
           width: "100%",
+          margin: 0,
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
         }}
         axis="x"
         values={todoStatus}
@@ -81,17 +85,16 @@ const TodoStstusList = () => {
           dispatch(updateTodoStatusOrder({ newOrder }));
         }}>
         <Box
-          height="95%"
           sx={{
             display: "flex",
             justifyContent: "flex-start",
             gap: "1rem",
-            alignItems: "flex-start",
-            width: "95%",
-            paddingInline: { xs: "0", md: "2rem" },
-            overflow: "auto",
+            alignItems: "center",
+            width: "100%",
+            paddingInline: { xs: ".5rem", md: "2rem" },
+            overflow: "overlay",
             listStyle: "none",
-            height: "95vh",
+            height: { xs: "98%", md: "90%" },
             "& > *": {
               flexShrink: 0,
             },
