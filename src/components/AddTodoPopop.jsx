@@ -31,10 +31,10 @@ const AddTodoPopop = ({ open, setOpen, statusId }) => {
   return (
     <Dialog open={open} onClose={() => setOpen(false)}>
       <form onSubmit={(e) => handleAddTodo(e)}>
-        <DialogTitle>Add Todo</DialogTitle>
+        <DialogTitle>Add Item</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Enter the todo title and click the add button
+            Enter the Item title and click the add button
           </DialogContentText>
           <TextField
             autoFocus

@@ -82,7 +82,7 @@ const TodoStstusList = () => {
             flexShrink: 0,
           },
         }}
-        height="80%">
+        height="95%">
         {todoStatus.map((status) => {
           return <TodoStatus key={status.id} id={status.id} />;
         })}

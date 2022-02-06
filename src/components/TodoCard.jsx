@@ -12,6 +12,10 @@ import { Draggable } from "react-beautiful-dnd";
 const TodoCard = ({ id, statusId, index }) => {
   const dispatch = useDispatch();
 
+  const color = useSelector((state) => {
+    return state.todoStatus.find((status) => status.id === statusId).color;
+  });
+
   const todo = useSelector((state) =>
     state.todo.find((todo) => todo.id === id)
   );
@@ -28,10 +32,12 @@ const TodoCard = ({ id, statusId, index }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           sx={{
-            background: "#F8FAFC",
+            backgroundColor: color === "default" ? "grey.200" : color + ".dark",
+            opacity: ".9",
             display: "flex",
             justifyContent: "space-between",
             cursor: "grab",
+            color: color + ".contrastText",
           }}>
           <Box>
             <Typography variant="subtitle1" component={"h4"} sx={{ p: "1rem" }}>
@@ -40,11 +46,17 @@ const TodoCard = ({ id, statusId, index }) => {
           </Box>
 
           <Button
-            color="error"
             aria-label="delete"
             onClick={handleDeleteTodo}
             sx={{ flex: "0 1" }}>
-            <ClearIcon />
+            <ClearIcon
+              sx={{
+                color:
+                  color === "default"
+                    ? "action.active"
+                    : color + ".contrastText",
+              }}
+            />
           </Button>
         </Card>
       )}

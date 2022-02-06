@@ -13,6 +13,7 @@ const slice = createSlice({
         id: v4(),
         name,
         todos: [],
+        color: "default",
       };
       return [...state, todoStatus];
     },
@@ -54,6 +55,13 @@ const slice = createSlice({
       todoStatus.name = name;
       return state;
     },
+
+    updateTodoStatusColor: (state, action) => {
+      const { id, color } = action.payload;
+      const todoStatus = state.find((todoStatus) => todoStatus.id === id);
+      todoStatus.color = color;
+      return state;
+    },
   },
 });
 
@@ -66,4 +74,5 @@ export const {
   updateTodoStatusOrder,
   UpdateTodoInStatusOrder,
   updateTodoStatusName,
+  updateTodoStatusColor,
 } = slice.actions;
