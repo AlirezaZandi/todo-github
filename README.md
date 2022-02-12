@@ -1,6 +1,29 @@
-# Getting Started with Create React App
+# Multi Status Todo App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Live Website](https://multi-status-todo-app.netlify.app/)
+
+
+## What this app can do
+- You can add multiple statuses to store your todos in them
+- Use darg and drop to reorder todos or statuses
+- Make new badges and add them to your todo
+- modify statuses, todos and badges
+- Customize zolor of the statuses
+
+## What features will be added
+- Add multiple pages to the app
+- Add priority tags to the todos
+- Filter todos by badges, statuses, ...
+- Add another view other than column statuses
+- more customize features
+- ...
+
+## Usages
+- react
+- Redux / Redux toolkit
+- Material UI
+- Framer motion
+- react beautiful dnd
 
 ## Available Scripts
 
