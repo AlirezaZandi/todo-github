@@ -27,8 +27,19 @@ const slice = createSlice({
       const todo = state.find((todo) => todo.id === id);
       todo.badges = badgeIds;
     },
+
+    removeBadges: (state, action) => {
+      const { badgeId } = action.payload;
+      state.forEach((todo) => {
+        if (todo.badges) {
+          if (todo.badges.includes(badgeId)) {
+            todo.badges = todo.badges.filter((badge) => badge !== badgeId);
+          }
+        }
+      });
+    },
   },
 });
 
 export default slice.reducer;
-export const { addTodo, removeTodo, addBadges } = slice.actions;
+export const { addTodo, removeTodo, addBadges, removeBadges } = slice.actions;

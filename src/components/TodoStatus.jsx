@@ -124,10 +124,14 @@ const TodoStatus = ({ id }) => {
                     onPointerDown={(e) => controls.start(e)}
                     sx={{
                       cursor: "grab",
+                      backgroundColor: "transparent",
                       color:
                         color === "default"
                           ? "action.active"
                           : color + ".contrastText",
+                      "&:active": {
+                        backgroundColor: "transparent",
+                      },
                     }}>
                     <DragIndicatorIcon />
                   </IconButton>
