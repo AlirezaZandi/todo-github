@@ -10,15 +10,32 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import SpeedDial from "@mui/material/SpeedDial";
 import MenuIcon from "@mui/icons-material/Menu";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
+import ListIcon from "@mui/icons-material/List";
 import LabelIcon from "@mui/icons-material/Label";
 import MailIcon from "@mui/icons-material/Mail";
+import BadgesDialog from "../dialogs/BadgesDialog";
+
+const badgesMenu = [
+  {
+    label: "Add badge",
+    icon: <LabelIcon />,
+  },
+  {
+    label: "Badges list",
+    icon: <ListIcon />,
+  },
+];
 
 export default function SwipeableTemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
+  const [openAddBadgeDialog, setOpenAddBadgeDialog] = React.useState(false);
 
   const toggleDrawer = () => {
     setOpen((p) => !p);
+  };
+
+  const handleOpenMenu = () => {
+    setOpenAddBadgeDialog(true);
   };
 
   const list = () => (
@@ -28,18 +45,16 @@ export default function SwipeableTemporaryDrawer() {
       onClick={toggleDrawer}
       onKeyDown={toggleDrawer}>
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {badgesMenu.map((menu, index) => (
+          <ListItem button key={index} onClick={() => handleOpenMenu(index)}>
+            <ListItemIcon>{menu.icon}</ListItemIcon>
+            <ListItemText primary={menu.label} />
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
+        {["Pages", "page1", "page2"].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -57,7 +72,8 @@ export default function SwipeableTemporaryDrawer() {
         ariaLabel="SpeedDial"
         onClick={toggleDrawer}
         sx={{ position: "absolute", bottom: 16, right: 16 }}
-        icon={<MenuIcon />}></SpeedDial>
+        icon={<MenuIcon />}
+      />
       <SwipeableDrawer
         anchor="right"
         open={open}
@@ -65,6 +81,7 @@ export default function SwipeableTemporaryDrawer() {
         onOpen={toggleDrawer}>
         {list()}
       </SwipeableDrawer>
+      <BadgesDialog open={openAddBadgeDialog} setOpen={setOpenAddBadgeDialog} />
     </>
   );
 }
