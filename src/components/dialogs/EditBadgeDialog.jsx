@@ -32,7 +32,7 @@ const BadgesDialog = ({ open, setOpen, badgeId }) => {
       setColor(badge.color);
       setTitle(badge.description);
     }
-  }, [badgeId]);
+  }, [badge, badgeId]);
 
   const handleEditBadge = (e) => {
     e.preventDefault();
