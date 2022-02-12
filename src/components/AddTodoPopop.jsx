@@ -31,7 +31,8 @@ const AddTodoPopop = ({ open, setOpen, statusId }) => {
       return;
     }
     const id = v4();
-    const badgesIds = selctedBadges.map((badge) => badge.id);
+    let badgesIds = selctedBadges.map((badge) => badge.id);
+    if (badgesIds.length === 0) badgesIds = [];
     dispatch(addTodo({ id, description: title, badgesIds, moreInfo }));
     dispatch(addTodoToStatus({ id: statusId, todoId: id }));
     setOpen(false);

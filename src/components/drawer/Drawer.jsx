@@ -14,6 +14,7 @@ import ListIcon from "@mui/icons-material/List";
 import LabelIcon from "@mui/icons-material/Label";
 import MailIcon from "@mui/icons-material/Mail";
 import BadgesDialog from "../dialogs/BadgesDialog";
+import BadgdesListDialog from "../dialogs/BadgesListDialog";
 
 const badgesMenu = [
   {
@@ -29,13 +30,18 @@ const badgesMenu = [
 export default function SwipeableTemporaryDrawer() {
   const [open, setOpen] = React.useState(false);
   const [openAddBadgeDialog, setOpenAddBadgeDialog] = React.useState(false);
+  const [openBadgeListDialog, setOpenBadgeListDialog] = React.useState(false);
 
   const toggleDrawer = () => {
     setOpen((p) => !p);
   };
 
-  const handleOpenMenu = () => {
-    setOpenAddBadgeDialog(true);
+  const handleOpenMenu = (menuIndex) => {
+    if (menuIndex === 0) {
+      setOpenAddBadgeDialog(true);
+    } else if (menuIndex === 1) {
+      setOpenBadgeListDialog(true);
+    }
   };
 
   const list = () => (
@@ -55,7 +61,7 @@ export default function SwipeableTemporaryDrawer() {
       <Divider />
       <List>
         {["Pages", "page1", "page2"].map((text, index) => (
-          <ListItem button key={text}>
+          <ListItem button key={text} disabled>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
             </ListItemIcon>
@@ -82,6 +88,10 @@ export default function SwipeableTemporaryDrawer() {
         {list()}
       </SwipeableDrawer>
       <BadgesDialog open={openAddBadgeDialog} setOpen={setOpenAddBadgeDialog} />
+      <BadgdesListDialog
+        open={openBadgeListDialog}
+        setOpen={setOpenBadgeListDialog}
+      />
     </>
   );
 }

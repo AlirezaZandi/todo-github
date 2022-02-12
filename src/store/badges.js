@@ -20,8 +20,18 @@ const slice = createSlice({
       const { id } = action.payload;
       return state.filter((badge) => badge.id !== id);
     },
+
+    editBadge: (state, action) => {
+      const { id, description, color } = action.payload;
+      const newBadge = {
+        id,
+        description,
+        color,
+      };
+      return state.map((badge) => (badge.id === id ? newBadge : badge));
+    },
   },
 });
 
 export default slice.reducer;
-export const { addBadge, removeBadge } = slice.actions;
+export const { addBadge, removeBadge, editBadge } = slice.actions;
