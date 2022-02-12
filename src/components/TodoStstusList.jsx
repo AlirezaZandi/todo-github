@@ -77,6 +77,7 @@ const TodoStstusList = () => {
           height: "100vh",
           display: "flex",
           alignItems: "center",
+          overflow: "overlay",
         }}
         axis="x"
         values={todoStatus}
@@ -91,7 +92,7 @@ const TodoStstusList = () => {
             alignItems: "center",
             width: "100%",
             paddingInline: { xs: ".5rem", md: "2rem" },
-            overflow: "overlay",
+
             listStyle: "none",
             height: { xs: "98%", md: "90%" },
             "& > *": {
@@ -101,13 +102,18 @@ const TodoStstusList = () => {
           {todoStatus.map((status) => {
             return <TodoStatus id={status.id} key={status.id} />;
           })}
-          <Button
-            variant="text"
-            sx={{ alignSelf: "flex-start", color: "#ddd" }}
-            onClick={() => setOpenDialog(true)}>
-            <AddIcon />
-            Add new status
-          </Button>
+          <Reorder.Item
+            key={0}
+            drag="falsex"
+            style={{ alignSelf: "flex-start" }}>
+            <Button
+              variant="text"
+              sx={{ color: "#ddd" }}
+              onClick={() => setOpenDialog(true)}>
+              <AddIcon />
+              Add new status
+            </Button>
+          </Reorder.Item>
         </Box>
       </Reorder.Group>
       <AddStatusDialog open={openDialog} setOpen={setOpenDialog} />

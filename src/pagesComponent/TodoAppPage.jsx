@@ -6,6 +6,7 @@ import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import LabelIcon from "@mui/icons-material/Label";
 import BadgesDialog from "../components/dialogs/BadgesDialog";
+import Drawer from "../components/drawer/Drawer";
 
 const actions = [{ icon: <LabelIcon />, name: "Add Badge" }];
 
@@ -19,7 +20,7 @@ const TodoAppPage = () => {
         justifyContent: "center",
       }}>
       <TodoStatusList />
-      <SpeedDial
+      {/* <SpeedDial
         ariaLabel="SpeedDial"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}>
@@ -32,7 +33,8 @@ const TodoAppPage = () => {
           />
         ))}
       </SpeedDial>
-      <BadgesDialog open={openDialog} setOpen={setOpenDialog} />
+      <BadgesDialog open={openDialog} setOpen={setOpenDialog} /> */}
+      <Drawer />
     </Box>
   );
 };
